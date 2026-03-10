@@ -12,19 +12,8 @@ st.set_page_config(page_title="QuarterChart Clone", layout="wide")
 st.sidebar.title("Navigation")
 page = st.sidebar.selectbox("Choose a page", ["Home", "Rankings", "Screener", "Watchlist", "Treemap"])
 
-# Mock login state for paywall
-if 'logged_in' not in st.session_state:
-    st.session_state.logged_in = False
-    st.session_state.tier = 'Free'
-
-if st.sidebar.button("Login / Upgrade"):
-    # Mock login
-    st.session_state.logged_in = True
-    st.session_state.tier = st.selectbox("Tier", ["Free", "Basic", "Standard", "Pro"])
-
-if not st.session_state.logged_in:
-    st.warning("🔒 Login required for full access. Free tier limited.")
-    st.stop()
+# All features open to everyone
+st.session_state.tier = 'Premium'
 
 # Home page
 if page == "Home":
@@ -133,4 +122,4 @@ elif page == "Treemap":
     st.info("Interactive market cap treemap. Pro feature.")
 
 st.sidebar.markdown("---")
-st.sidebar.caption(f"Logged in as {st.session_state.tier} tier")
+st.sidebar.caption("🌐 Open to everyone")
